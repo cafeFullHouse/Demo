@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おぢさんもんじゃ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="transitionPage" class="page">
+        <img id="titleStrings" class="strings-center img-nonselect" src="title1.png" alt="hoge">
+
+        <button id="gameStartBtn" class="btn-base"  onclick="startGame()">
+            <img src="gameStartBtn.png" class="btn-img" alt="ゲーム開始ボタン">
+        </button>
+
+        <img id="titleStrings" class="strings-center img-nonselect" src="title2.png" alt="hoge">
+    </div>
+
+    <script>
+        function startGame()
+        {
+            window.location.href = "play.html";
+        }
+    </script>
+</body>
+<footer>
+    <a href="contact.html" class="contact-link" target="_blank">お問い合わせ</a>
+</footer>
+</html>
