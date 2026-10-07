@@ -4,8 +4,8 @@ let stream = null;
 
 //カウント用
 let count = 1;
-const maxCount = 12;
-const answerMaxCount = 20;
+const maxCount = 4;
+const answerMaxCount = 8;
 const counter = document.getElementById("counter");
 
 //録音用
@@ -21,7 +21,6 @@ const transitionPage = document.getElementById("transitionPage");
 const gameStartUI = document.getElementById("gameStartUI");
 const answerPage = document.getElementById("answerPage");
 const finishPage = document.getElementById("finishPage");
-const promotionPage = document.getElementById("promotionPage")
 
 const answerStrings = document.getElementById("answerStrings");
 
@@ -59,15 +58,7 @@ let images = [
     "img1.png",
     "img2.png",
     "img3.png",
-    "img4.png",
-    "img5.png",
-    "img6.png",
-    "img7.png",
-    "img8.png",
-    "img9.png",
-    "img10.png",
-    "img11.png",
-    "img12.png"
+    "img4.png"
 ]
 
 //配列のシャッフル関数
@@ -82,15 +73,15 @@ function createRandomAnswerList()
 {
     answerList = [];
 
-    for(let i = 0; i < 12; i++)
+    for(let i = 0; i < maxCount; i++)
     {
         answerList.push(i);
     }
 
-    const remaining = answerMaxCount - 12;
+    const remaining = answerMaxCount - maxCount;
     for(let j = 0; j < remaining; j++)
     {
-        const randomIndex = Math.floor(Math.random() * 12);
+        const randomIndex = Math.floor(Math.random() * maxCount);
         answerList.push(randomIndex);
     }
 
@@ -235,7 +226,7 @@ function answerBtnClick()
     const answerImg = images[index];
 
     answerDisplayImg.src = answerImg;
-    setImageErrorHandler(answerImg);
+    setImageErrorHandler(answerDisplayImg);
 
     answerStrings.src = "strings6.png";
 
@@ -251,14 +242,6 @@ function goNextQuestion()
 {
     currentAnswerIndex++;
 
-    if(currentAnswerIndex > answerMaxCount)
-    {
-        answerPage.style.display = "none";
-        finishPage.style.display = "block";
-
-        return;
-    }
-
     playBtn.style.display = "block";
     answerDisplayImg.style.display = "none";
 
@@ -267,6 +250,14 @@ function goNextQuestion()
     answerBtn.querySelector("img").src = "answerBefore.png";
 
     answerBtn.onclick = answerBtnClick;
+
+    if(currentAnswerIndex > answerMaxCount)
+    {
+        answerPage.style.display = "none";
+        finishPage.style.display = "block";
+
+        return;
+    }
 
     setQuestion();
 }
@@ -295,12 +286,6 @@ function playRecording()
     playingAudio.play();
 };
 
-function goPromotionPage()
-{
-    finishPage.style.display = "none";
-    promotionPage.style.display = "block";
-}
-
 function resetGame()
 {
     savedAudios.length = 0;
@@ -313,13 +298,14 @@ function resetGame()
     displayImg.src = images[0];
     setImageErrorHandler(displayImg);
 
+    answerDisplayImg.src = "img0.png";
+    answerDisplayImg.alt = "?";
     answerDisplayImg.style.display = "none";
     playBtn.style.display = "block";
     answerBtn.querySelector("img").src = "answerBefore.png";
     answerStrings.src = "strings5.png";
 
     finishPage.style.display = "none";
-    promotionPage.style.display = "none";
     answerPage.style.display = "none";
     gameStartUI.style.display = "none";
     transitionPage.style.display = "none";
